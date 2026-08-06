@@ -1,8 +1,20 @@
 .venv/
-data/*.parquet
-data/*.json
 __pycache__/
 .ipynb_checkpoints/
 *.pyc
 .jupyter/
 notebooks/*.csv
+
+# local machine / editor stuff — not part of the lab
+.claude/
+.idea
+.vscode
+.mcp.json
+.bash_profile
+.bashrc
+.gitconfig
+.gitmodules
+.profile
+.ripgreprc
+.zprofile
+.zshrc

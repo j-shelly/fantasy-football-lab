@@ -19,20 +19,47 @@ unfilled blanks never crash, they print a friendly nudge), 🔑 **ANSWER**
 (commented-out solution right below), 🪄 **MAGIC** (fancy visualization — "just
 run it").
 
-## Setup (parent, one time)
+## Setup on a new computer (parent, one time, ~5 min)
 
-Requires [uv](https://docs.astral.sh/uv/) and internet for the first fetch:
+The NFL data ships with the repo (`data/`, ~4 MB), so after these steps
+everything works offline — no downloads needed.
 
-```bash
-uv sync                              # installs Python packages into .venv
-uv run python scripts/warm_cache.py  # downloads NFL data (~1 min, ~4 MB)
-```
-
-## Launching the lab
+**1. Get the lab.** Either clone it:
 
 ```bash
-./start_lab.sh
+git clone https://github.com/j-shelly/fantasy-football-lab.git
 ```
+
+…or on GitHub click the green **Code** button → **Download ZIP**, then unzip
+it somewhere easy to find (like the Desktop).
+
+**2. Install [uv](https://docs.astral.sh/uv/)** (it installs Python too — no
+separate Python setup):
+
+```powershell
+# Windows (paste into PowerShell)
+powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+```
+
+```bash
+# Mac / Linux (paste into Terminal)
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
+
+Then close and reopen the terminal so `uv` is found.
+
+**3. Install the lab's packages.** In a terminal, from the lab folder:
+
+```bash
+uv sync
+```
+
+## Launching the lab (kids can do this part)
+
+- **Windows**: double-click `start_lab.bat`
+- **Mac**: double-click `start_lab_mac.command` (first time: right-click →
+  **Open** → **Open**, to get past the security prompt)
+- **Linux / WSL**: `./start_lab.sh`
 
 Your browser opens JupyterLab in the `notebooks/` folder. Kids double-click a
 mission, then run cells top-to-bottom with **Shift+Enter**. If a notebook gets
@@ -80,7 +107,8 @@ to add your own missions or change wording, then rebuild.
 - **Data**: free [nflverse](https://nflverse.nflverse.com/) via `nflreadpy` —
   weekly player stats 2021–2025 (offense *and* individual defenders), schedules,
   team colors, and FantasyPros expert consensus draft rankings. Cached as
-  parquet in `data/` so everything works offline after the first fetch.
+  parquet in `data/` (included in the repo) so everything works offline;
+  `uv run python scripts/warm_cache.py` re-downloads it from scratch if needed.
 - **`ffkit/`**: the toolkit the notebooks import — scoring engine
   (`scoring.py`), projections + value-over-replacement (`draft.py`), start/sit
   (`lineup.py`), plotly charts (`viz.py`), sliders (`widgets.py`).
