@@ -76,6 +76,34 @@ uv run python -c "import ffkit; ffkit.refresh_all()"
 (or run the refresh cell at the bottom of Mission 5), then use `season=2026`
 and the current week number in Mission 5.
 
+## Getting lab updates with git (for terminal-curious kids 🧑‍💻)
+
+Stats come from the refresh cell above — but if the lab itself gets new
+missions or fixes, `git pull` downloads them. In a terminal, from the lab
+folder:
+
+```bash
+git status
+```
+
+That shows what *you* have changed — and once you've worked through a mission,
+your notebook counts as a change. **To keep your progress**, duplicate the
+notebooks you care about first (in JupyterLab: right-click the file →
+**Duplicate** — the copy, like `04_draft_day-Copy1.ipynb`, is yours and git
+won't touch it). Then:
+
+```bash
+git restore .   # reset the lab to factory settings (your copies are safe!)
+git pull        # download the newest version of the lab
+uv sync         # in case the update added new packages
+```
+
+Heads up: `git restore .` also rewinds `data/` to the stats that shipped with
+the lab, so run the refresh cell again if you're mid-season.
+
+(Downloaded as a ZIP instead? Grab a fresh ZIP and copy your duplicated
+notebooks over.)
+
 ## League scoring
 
 The lab is platform-agnostic. Presets included:
