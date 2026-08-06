@@ -4,6 +4,7 @@ __pycache__/
 *.pyc
 .jupyter/
 notebooks/*.csv
+data/my_team.json
 
 # local machine / editor stuff — not part of the lab
 .claude/
