@@ -43,6 +43,12 @@ Pick either way:
   git clone https://github.com/j-shelly/fantasy-football-lab.git
   ```
 
+  Never used git? It's a free tool that downloads the lab *and* makes
+  getting updates easy later. GitHub's official
+  [Set up Git guide](https://docs.github.com/en/get-started/git-basics/set-up-git)
+  walks you through installing it — then come back and run the command
+  above.
+
 - **Without git:** on the GitHub page, click the green **Code** button →
   **Download ZIP**, then unzip it somewhere easy to find (like the Desktop).
 
@@ -122,7 +128,9 @@ uv run python -c "import ffkit; ffkit.refresh_all()"
 ## Getting lab updates with git (for terminal-curious kids 🧑‍💻)
 
 The command above refreshes *stats*. If the lab itself gets new missions or
-fixes, `git pull` downloads those.
+fixes, `git pull` downloads those. (No git on your computer yet? GitHub's
+[Set up Git guide](https://docs.github.com/en/get-started/git-basics/set-up-git)
+shows how to install it.)
 
 **First, protect your progress.** Once you've worked through a mission, git
 sees your notebook as "changed" — and updating resets it. So in JupyterLab,
