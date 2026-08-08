@@ -77,6 +77,28 @@ def scoring_picker():
     ]))
 
 
+def _blue_shading(col: pd.Series) -> list[str]:
+    """Shade a numeric column light-to-dark blue.
+
+    pandas' built-in background_gradient needs matplotlib, which the lab
+    doesn't install — so we mix the colors ourselves.
+    """
+    lo, hi = col.min(), col.max()
+    span = hi - lo
+    styles = []
+    for v in col:
+        if pd.isna(v) or pd.isna(span):
+            styles.append("")
+            continue
+        t = 0.0 if span == 0 else (v - lo) / span
+        r = round(247 + t * (8 - 247))
+        g = round(251 + t * (48 - 251))
+        b = round(255 + t * (107 - 255))
+        text = "#f1f1f1" if t > 0.55 else "#000000"
+        styles.append(f"background-color: rgb({r},{g},{b}); color: {text}")
+    return styles
+
+
 def draft_dashboard(pool: pd.DataFrame, rules: ScoringRules, top: int = 15):
     """The Draft Machine: move a slider, watch the whole board re-rank."""
     import ipywidgets as w
@@ -93,8 +115,8 @@ def draft_dashboard(pool: pd.DataFrame, rules: ScoringRules, top: int = 15):
             ["rank", "player_display_name", "pos", "team", "tier",
              "proj_per_game", "proj_points", "value"]
         ].rename(columns={"player_display_name": "player"})
-        display(show.style.hide(axis="index").background_gradient(
-            subset=["value"], cmap="Blues"))
+        display(show.style.hide(axis="index").apply(
+            _blue_shading, subset=["value"]))
         _viz.big_board_chart(board, top=top).show()
 
     w.interact(
